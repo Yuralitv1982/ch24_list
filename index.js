@@ -1,6 +1,7 @@
 const fs = require('fs');
+// const process = require('process');
 
-fs.readdir('.', (err, filenames) => {
+fs.readdir(process.cwd(), (err, filenames) => {
    //either
    // err === an error object, which means something went wrong
    // or
