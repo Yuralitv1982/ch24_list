@@ -14,13 +14,25 @@ fs.readdir(process.cwd(), (err, filenames) => {
       // return new Error(err)
    }
 
-   // bad code here
+   const allSats = Array(filenames.length).fill(null);
+
    for (let filename of filenames) {
+      const index = filenames.indexOf(filename);
       fs.lstat(filename, (err, stats) => {
          if (err) {
             console.log(err);
          }
-         console.log(filename, stats.isFile());
+         allSats[index] = stats;
+
+         const ready = allSats.every((stats) => {
+            return stats;
+         });
+
+         if (ready) {
+            allSats.forEach((stats, index) => {
+               console.log(filenames[index], stats.isFile());
+            });
+         }
       });
    }
 });
