@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "ch24_list",
   "version": "1.0.0",
   "main": "index.js",

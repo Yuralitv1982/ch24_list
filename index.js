@@ -1,6 +1,11 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const util = require('util');
+// const fs = require('fs.cjs');
+import fs from 'fs';
+// const util = require('util');
+// import util from 'util';
+import chalk from 'chalk';
+
+console.log(chalk.blue('Hello world!'));
 // const process = require('process');
 
 // Method #2
@@ -28,7 +33,11 @@ fs.readdir(process.cwd(), async (err, filenames) => {
    const allStats = await Promise.all(statPromises);
    for (let stats of allStats) {
       const index = allStats.indexOf(stats);
-      console.log(filenames[index], stats.isFile());
+      if (stats.isFile()) {
+         console.log(filenames[index]);
+      } else {
+         console.log(chalk.yellow.bold(filenames[index]));
+      }
    }
 });
 
