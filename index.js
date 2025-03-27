@@ -4,8 +4,9 @@ import fs from 'fs';
 // const util = require('util');
 // import util from 'util';
 import chalk from 'chalk';
+import path from 'path';
 
-console.log(chalk.blue('Hello world!'));
+// console.log(chalk.blue('Hello world!')); // test use chalk
 // const process = require('process');
 
 // Method #2
@@ -14,7 +15,10 @@ console.log(chalk.blue('Hello world!'));
 // Method #3
 const { lstat } = fs.promises;
 
-fs.readdir(process.cwd(), async (err, filenames) => {
+// console.log(process.argv);
+const targetDir = process.argv[2] || process.cwd();
+
+fs.readdir(targetDir, async (err, filenames) => {
    //either
    // err === an error object, which means something went wrong
    // or
@@ -27,7 +31,7 @@ fs.readdir(process.cwd(), async (err, filenames) => {
    }
 
    const statPromises = filenames.map((filename) => {
-      return lstat(filename);
+      return lstat(path.join(targetDir, filename));
    });
 
    const allStats = await Promise.all(statPromises);
